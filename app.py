@@ -171,4 +171,4 @@ with gr.Blocks(title="TranscriptorAI") as demo:
                 outputs=[file_status, file_plain, file_ts, file_f1, file_f2, file_f3])
 
 demo.queue()
-demo.launch()
+demo.launch(server_name="0.0.0.0", server_port=7860)
