@@ -5,6 +5,9 @@ import os
 import re
 import tempfile
 from pathlib import Path
+import imageio_ffmpeg
+
+os.environ["PATH"] += os.pathsep + os.path.dirname(imageio_ffmpeg.get_ffmpeg_exe())
 
 def format_srt_time(seconds):
     h = int(seconds // 3600)
@@ -65,10 +68,12 @@ def transcribe(audio_path, model_size, language):
 
 def download_audio(url):
     tmp = tempfile.mkdtemp()
+    ffmpeg_path = imageio_ffmpeg.get_ffmpeg_exe()
     opts = {
         "format": "bestaudio/best",
         "outtmpl": os.path.join(tmp, "%(title)s.%(ext)s"),
         "postprocessors": [{"key": "FFmpegExtractAudio", "preferredcodec": "mp3", "preferredquality": "192"}],
+        "ffmpeg_location": os.path.dirname(ffmpeg_path),
         "quiet": True,
         "no_warnings": True,
     }
