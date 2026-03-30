@@ -1,3 +1,5 @@
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch
 openai-whisper
 yt-dlp
 ffmpeg-python
